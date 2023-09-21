@@ -30,7 +30,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //wall
     sf::Texture wallTexture;
-    if (!wallTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Wall_Brown.png")) {
+    if (!wallTexture.loadFromFile("../Sokoban pack/PNG/Wall_Brown.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
 
@@ -39,7 +39,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //target
     sf::Texture targetTexture;
-    if (!targetTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/EndPoint_Beige.png")) {
+    if (!targetTexture.loadFromFile("../Sokoban pack/PNG/EndPoint_Beige.png")) {
         std::cout <<"fail to open target img" << std::endl;
     }
     sf::Sprite targetSprite;
@@ -47,7 +47,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //box
     sf::Texture boxTexture;
-    if (!boxTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Crate_Yellow.png")) {
+    if (!boxTexture.loadFromFile("../Sokoban pack/PNG/Crate_Yellow.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite boxSprite;
@@ -55,7 +55,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //player
     sf::Texture playerTexture;
-    if (!playerTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Character5.png")) {
+    if (!playerTexture.loadFromFile("../Sokoban pack/PNG/Character5.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite playerSprite;
@@ -63,7 +63,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //empty
     sf::Texture emptyTexture;
-    if (!emptyTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/GroundGravel_Grass.png")) {
+    if (!emptyTexture.loadFromFile("../Sokoban pack/PNG/GroundGravel_Grass.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite emptySprite;
@@ -226,7 +226,7 @@ void welcome(sf::RenderWindow& window, bool& gameStarted){
     window.clear();
     sf::Text welcomeText;
     sf::Font font;
-    if (!font.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/fonts/InclusiveSans-Regular.ttf")) {
+    if (!font.loadFromFile("../fonts/InclusiveSans-Regular.ttf")) {
             std::cerr << "Failed to load font." << std::endl;
     }
     welcomeText.setFont(font);
@@ -280,52 +280,3 @@ void welcome(sf::RenderWindow& window, bool& gameStarted){
      }
  }
 
-
-
-//
-//     while (window.isOpen() && choice == 0) {
-//         sf::Event event;
-//         while (window.pollEvent(event)) {
-//             if (event.type == sf::Event::Closed) {
-//                 window.close();
-//             }
-//             // 处理用户的键盘输入
-//             if (event.type == sf::Event::KeyPressed) {
-//                 if (event.key.code == sf::Keyboard::Num1) {
-//                     choice = 1; // 用户选择了1，开始游戏
-//                 } else if (event.key.code == sf::Keyboard::Num2) {
-//                     choice = 2; // 用户选择了2，查看游戏规则
-//                 }
-//             }
-//         }
-//
-//         window.clear();
-//         window.draw(welcomeText);
-//         window.display();
-//     }
-//
-//     if (choice == 1) {
-//         gameStarted = true;
-//         window.clear();
-//         move();
-//     }
-//    else if(choice==2){
-//        system("clear");
-//        std::cout<<"Rules:"<<std::endl;
-//        std::cout<<"Press 'W,S,A,D' to control movement  push green box to yellow destination "<<std::endl;
-//        std::cout<<"Press 'q' to exit";
-//        std::cout<<"Press 1 to return";
-//        std::cin>>choice;
-//    }
-//           if(choice==1)
-//           {
-//               welcome(window, gameStarted);
-//           }
-//       }
-//   }
-//       window.clear();
-//       window.draw(welcomeText);
-//       window.display();
-//}
-
-   
