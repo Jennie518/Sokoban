@@ -30,7 +30,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //wall
     sf::Texture wallTexture;
-    if (!wallTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/Sokoban pack/PNG/Wall_Brown.png")) {
+    if (!wallTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Wall_Brown.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
 
@@ -39,7 +39,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //target
     sf::Texture targetTexture;
-    if (!targetTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/Sokoban pack/PNG/EndPoint_Beige.png")) {
+    if (!targetTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/EndPoint_Beige.png")) {
         std::cout <<"fail to open target img" << std::endl;
     }
     sf::Sprite targetSprite;
@@ -47,7 +47,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //box
     sf::Texture boxTexture;
-    if (!boxTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/Sokoban pack/PNG/Crate_Yellow.png")) {
+    if (!boxTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Crate_Yellow.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite boxSprite;
@@ -55,7 +55,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //player
     sf::Texture playerTexture;
-    if (!playerTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/Sokoban pack/PNG/Character5.png")) {
+    if (!playerTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/Character5.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite playerSprite;
@@ -63,7 +63,7 @@ void drawMap(sf::RenderWindow& window) {
     
     //empty
     sf::Texture emptyTexture;
-    if (!emptyTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/Sokoban pack/PNG/GroundGravel_Grass.png")) {
+    if (!emptyTexture.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/Sokoban pack/PNG/GroundGravel_Grass.png")) {
         std::cout <<"fail to open wall img" << std::endl;
     }
     sf::Sprite emptySprite;
@@ -226,7 +226,7 @@ void welcome(sf::RenderWindow& window, bool& gameStarted){
     window.clear();
     sf::Text welcomeText;
     sf::Font font;
-    if (!font.loadFromFile("/Users/zhanyijun/Desktop/MSD/CS6010/Final Project/fonts/InclusiveSans-Regular.ttf")) {
+    if (!font.loadFromFile("/Users/zhanyijun/Desktop/MSD/Sokoban/fonts/InclusiveSans-Regular.ttf")) {
             std::cerr << "Failed to load font." << std::endl;
     }
     welcomeText.setFont(font);
