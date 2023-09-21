@@ -4,6 +4,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Sokoban 123");
     bool gameStarted = false;
+    int currentLevel = 0;
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -13,9 +14,9 @@ int main()
             if (!gameStarted) {
                 welcome(window, gameStarted);
             }
-            if (gameStarted) {
-                move(window);
-            }
+//            if (gameStarted) {
+//                move(window, currentLevel);
+//            }
         }
     }
 

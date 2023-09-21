@@ -17,7 +17,7 @@
 
 //#import <Foundation/Foundation.h>
 void welcome(sf::RenderWindow& window, bool& gameStarted);
-void move(sf::RenderWindow& window);
+void move(sf::RenderWindow& window, int currentLevel);
 void print();
 void drawMap(sf::RenderWindow& window);
 #endif /* Gamehelpers_hpp */
