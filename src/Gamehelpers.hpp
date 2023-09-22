@@ -17,7 +17,7 @@
 
 //#import <Foundation/Foundation.h>
 void welcome(sf::RenderWindow& window, bool& gameStarted);
-void move(sf::RenderWindow& window, int currentLevel);
+void move(sf::RenderWindow& window, int currentLevel, sf::Music& backgroundMusic);
 void print();
 //void playMusic(int currentLevel);
 void drawMap(sf::RenderWindow& window);
