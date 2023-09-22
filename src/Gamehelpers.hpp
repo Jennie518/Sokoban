@@ -11,7 +11,7 @@
 #include<cstring>
 #include<stdlib.h>
 #include<stdio.h>
-
+#include <SFML/Audio.hpp>
 #import <Availability.h>
 
 
@@ -19,5 +19,6 @@
 void welcome(sf::RenderWindow& window, bool& gameStarted);
 void move(sf::RenderWindow& window, int currentLevel);
 void print();
+//void playMusic(int currentLevel);
 void drawMap(sf::RenderWindow& window);
 #endif /* Gamehelpers_hpp */

@@ -7,29 +7,7 @@
 
 #include "Gamehelpers.hpp"
 #include <SFML/Graphics/Text.hpp>
-
-//sf::RenderWindow window(sf::VideoMode(800, 600), "Sokoban abc");
-//char a[10][10] = {
-//    {"  ###   "},
-//    {"  #6#   "},
-//    {"  #0####"},
-//    {"### o06#"},
-//    {"#60  ###"},
-//    {"####0#  "},
-//    {"   #6#  "},
-//    {"   ###  "}
-//};
-//
-//char b[10][10] = {
-//    {"########"},
-//    {"#   0 6#"},
-//    {"#   ####"},
-//    {"### o  #"},
-//    {"#60    #"},
-//    {"### 0# #"},
-//    {"#6     #"},
-//    {"########"}
-//};
+#include <SFML/Audio.hpp>
 char levels[2][10][10] = {
     {
         {"  ###   "},
@@ -52,14 +30,8 @@ char levels[2][10][10] = {
         {"########"}
     }
 };
-//int currentLevel = 0;
-
-//bool hasNextLevel() {
-//    return currentLevel < (sizeof(levels) / sizeof(levels[0]) - 1);
-//}
-//
-
-// 定义地图元素的尺寸
+sf::SoundBuffer boxPushedSoundBuffer;
+sf::Sound boxPushedSound;
 const float tileSize = 63.0f;
 
 void drawMap(sf::RenderWindow& window, int currentLevel) {
@@ -105,7 +77,7 @@ void drawMap(sf::RenderWindow& window, int currentLevel) {
     }
     sf::Sprite emptySprite;
     emptySprite.setTexture(emptyTexture);
-    // 遍历地图数组，绘制地图元素
+    // add spirits
     for (int y = 0; y < 8; y++) {
         for (int x = 0; x < 8; x++) {
 //            std::cout << "currrent level: " << currentLevel << "\n";
@@ -149,6 +121,15 @@ void move(sf::RenderWindow& window, int currentLevel){
     int x,y;
     x=3;
     y=4;
+    if (!boxPushedSoundBuffer.loadFromFile("../Sokoban pack/icon.ogg")) {
+            std::cout << "Failed to load box pushed sound." << std::endl;
+        }
+        boxPushedSound.setBuffer(boxPushedSoundBuffer);
+//    sf::Music backgroundMusic;
+//      if (!backgroundMusic.openFromFile("../Sokoban pack/main.ogg")) {
+//          std::cerr << "Failed to open background music file." << std::endl;
+//      }
+//      backgroundMusic.play(); // 播放背景音乐
     drawMap(window, currentLevel);
     while (window.isOpen()) {
         sf::Event event;
@@ -186,7 +167,9 @@ void move(sf::RenderWindow& window, int currentLevel){
                         // If player is pushing a box
                         if (nextPos == '0') {
                             levels[currentLevel][x+2*dx][y+2*dy] = '0';
-                           
+                            if (nextNextPos == '6') { // Check if the box is being pushed onto the target
+                                boxPushedSound.play();
+                            }
                         }
                         if(levels[currentLevel][x][y] =='6'){
                             levels[currentLevel][x][y] = '6';
@@ -217,9 +200,17 @@ void move(sf::RenderWindow& window, int currentLevel){
             if (!font.loadFromFile("../fonts/Anton-Regular.ttf")) {
                 std::cerr << "Failed to load font." << std::endl;
             }
+//            playWinMusic(currentLevel+1);
 
-            window.clear();
-            
+//            sf::Music winAudio;
+//            if (!winAudio.openFromFile("../Sokoban pack/winneris.ogg")) {
+//                std::cout <<"Win Audio failed";
+//            }
+//            winAudio.play();
+//            int timeofMusic = 0;
+//            while (timeofMusic == 0) {
+//
+//            }
             // Step 1: Load the victory image
             sf::Texture victoryTexture;
             if (!victoryTexture.loadFromFile("../Sokoban pack/pizza.png")) {
@@ -228,50 +219,31 @@ void move(sf::RenderWindow& window, int currentLevel){
 
             sf::Sprite victorySprite;
             victorySprite.setTexture(victoryTexture);
+            
+            sf::Text text1;
+            text1.setFont(font);
+            text1.setCharacterSize(40);
+            text1.setPosition(150, 50);
+            text1.setString("Congratulations!");
+            text1.setFillColor(sf::Color::Red);
 
-            sf::Clock clock;  // 用于跟踪已过去的时间
-            float durationPerText = 2.0f;  // 每句话的渐入时间，单位为秒
+            sf::Text text2;
+            text2.setFont(font);
+            text2.setCharacterSize(40);
+            text2.setPosition(150, 100);
+            text2.setString("Enjoy your pizza now!");
+            text2.setFillColor(sf::Color::Red);
 
-            float totalDuration = 2 * durationPerText;  // 两句话的总时间
-            bool shouldClose = false;
+            window.clear(sf::Color::White);
+            window.draw(victorySprite);  // Draw the victory image
 
-            while (window.isOpen() && !shouldClose) {
-                float elapsed = clock.getElapsedTime().asSeconds();
-
-                // 第一句话的透明度计算
-                int alpha1 = std::min(static_cast<int>(255 * (elapsed / durationPerText)), 255);
-                
-                // 第二句话的透明度计算
-                int alpha2 = std::max(0, static_cast<int>(255 * ((elapsed - durationPerText) / durationPerText)));
-                
-                sf::Text text1;
-                text1.setFont(font);
-                text1.setCharacterSize(40);
-                text1.setPosition(150, 50);
-                text1.setString("Congratulations!");
-                text1.setFillColor(sf::Color::Red);
-
-                sf::Text text2;
-                text2.setFont(font);
-                text2.setCharacterSize(40);
-                text2.setPosition(150, 100);
-                text2.setString("Enjoy your pizza now!");
-                text2.setFillColor(sf::Color::Red);
-
-                window.clear(sf::Color::White);
-                window.draw(victorySprite);  // Draw the victory image
-
-                window.draw(text1);
-                window.draw(text2);
-                window.display();
-
-                if (elapsed > totalDuration) {
-                    shouldClose = true;
-                }
-            }
+            window.draw(text1);
+            window.draw(text2);
+            window.display();
 
             sf::sleep(sf::seconds(3));
             window.close();
+            
         }
 
     }
@@ -280,7 +252,11 @@ void move(sf::RenderWindow& window, int currentLevel){
 void welcome(sf::RenderWindow& window, bool& gameStarted) {
     int currentMenu = 0;
     bool showRules = false;
-
+    sf::Music menu;
+    if (!menu.openFromFile("../Sokoban pack/puzzlemenu.ogg")) {
+        std::cerr << "Failed to open background music file." << std::endl;
+    }
+    menu.play();
     sf::Font font;
     if (!font.loadFromFile("../fonts/Skranji-Bold.ttf")) {
         std::cerr << "Failed to load font." << std::endl;
@@ -403,3 +379,13 @@ void welcome(sf::RenderWindow& window, bool& gameStarted) {
             
         } // 主循环结束
     }
+//void playMusic(int currentLevel){
+//    if(currentLevel == 2){
+//        sf::Music winAudio;
+//        
+//        if (!winAudio.openFromFile("../Sokoban pack/winneris.ogg")) {
+//            std::cout <<"Win Audio failed";
+//        }
+//        winAudio.play();
+//    }
+//}
